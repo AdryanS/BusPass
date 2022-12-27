@@ -11,11 +11,9 @@
   <a href="#-participação">Participação</a>&nbsp;&nbsp;&nbsp;
 </p>
 
-### O aplicativo que vai mudar a sua experiência com o transporte público. 🚙💨
-
-<br />
-
 ## 💻 Projeto
+
+### O aplicativo que vai mudar a sua experiência com o transporte público. 🚙💨
 
 Já pensou em pagar a sua passagem, ter o controle do dinheiro destinado ao transporte e efetuar recargas na tela do celular?
 Com o aplicativo BusPass você faz tudo isso e muito mais. 
