@@ -1,3 +1,5 @@
+<br />
+
 <p align="center">
   <img src="https://github.com/AdryanS/BusPass/blob/config/images/BusPass.png" width="30%"/>
 </p>
@@ -66,7 +68,6 @@ npx expo start
 [![instagram](https://img.shields.io/badge/instagram-FE1D5E?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/dev.adryan/)
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/adryan-samuel/)
 
-<br />
 
 ### Design por `Matheus Alves`
 [![portfolio](https://img.shields.io/badge/portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://xn--portflio--matheus-alves-9ic.yolasite.com/)
