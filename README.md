@@ -30,7 +30,7 @@ Com o aplicativo BusPass você faz tudo isso e muito mais.
 - Efetue recargas e confira seus gastos de transporte
   - Por aqui, você pode colocar saldo através do seu cartão de débito, crédito ou pix, além de conferir todos os gastos.
 
-<brr />
+<br />
 <img src="https://github.com/AdryanS/BusPass/blob/config/images/logo.png" width="100%"/>
 
 ## ✨ Tecnologias
