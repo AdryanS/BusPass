@@ -32,6 +32,7 @@ Com o aplicativo BusPass você faz tudo isso e muito mais.
 
 <br />
 <img src="https://github.com/AdryanS/BusPass/blob/config/images/logo.png" width="100%"/>
+<img src="https://github.com/AdryanS/BusPass/blob/config/images/Cover%20_%20App.jpg" width="100%"/>
 
 ## ✨ Tecnologias
 
