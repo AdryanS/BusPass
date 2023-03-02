@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import { styles } from "../../src/styles/styles";
+import { theme } from "../../src/styles/theme";
 
-import { Text, Button, Input } from "../../src/components";
+import { Button, Input } from "../../src/components";
 import { Container, FormContainer, TextTitle, TextDescription, ButtonContainer, TextDescriptionLogin, TextDescriptionLoginLink } from "./styles";
 import { View, Dimensions } from "react-native";
 
@@ -54,7 +54,7 @@ const Recovery = ({ navigation }: Props) => {
           placeholder="Digite aqui seu e-mail"
           autoCapitalize="none"
           keyboardType="email-address"
-          placeholderTextColor={styles.colors.primary_300}
+          placeholderTextColor={theme.colors.primary_300}
           value={email}
           onChangeText={(text) => {
             setEmail(text);

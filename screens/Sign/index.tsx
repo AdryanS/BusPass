@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import { styles } from "../../src/styles/styles";
+import { theme } from "../../src/styles/theme";
 
-import { Text, Button, Input } from "../../src/components";
+import { Button, Input } from "../../src/components";
 import { Container, FormContainer, TextTitle, TextDescription, ButtonContainer, TextDescriptionLogin, TextDescriptionLoginLink } from "./styles";
-import { View, Dimensions } from "react-native";
+import { View } from "react-native";
 
 import { Props } from "../../navigation";
 
@@ -83,7 +83,7 @@ const Sign = ({ navigation }: Props) => {
           errorMessage={errorName}
           placeholder="Digite aqui seu nome completo"
           keyboardType="default"
-          placeholderTextColor={styles.colors.primary_300}
+          placeholderTextColor={theme.colors.primary_300}
           value={name}
           onChangeText={(text) => setName(text)}
           onEndEditing={() => {
@@ -96,7 +96,7 @@ const Sign = ({ navigation }: Props) => {
           errorMessage={errorCpf}
           placeholder="Digite aqui seu CPF"
           keyboardType="numeric"
-          placeholderTextColor={styles.colors.primary_300}
+          placeholderTextColor={theme.colors.primary_300}
           value={cpf}
           onChangeText={(text) => {
             let value = text.replace(/[^0-9]/g, "");
@@ -117,7 +117,7 @@ const Sign = ({ navigation }: Props) => {
           errorMessage={errorEmail}
           placeholder="Digite aqui seu e-mail"
           keyboardType="email-address"
-          placeholderTextColor={styles.colors.primary_300}
+          placeholderTextColor={theme.colors.primary_300}
           value={email}
           onChangeText={(text) => {
             setEmail(text);
@@ -133,7 +133,7 @@ const Sign = ({ navigation }: Props) => {
           errorMessage={errorPassword}
           placeholder="Digite aqui uma senha de acesso"
           keyboardType="default"
-          placeholderTextColor={styles.colors.primary_300}
+          placeholderTextColor={theme.colors.primary_300}
           secureTextEntry
           value={password}
           onChangeText={(text) => {

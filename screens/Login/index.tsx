@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import { styles } from "../../src/styles/styles";
 
-import { Text, Button, Input } from "../../src/components";
+import { Button, Input } from "../../src/components";
+import { theme } from "../../src/styles/theme";
 import {
   Container,
   FormContainer,
@@ -11,7 +11,7 @@ import {
   TextDescriptionLoginLink,
   TextTitle,
 } from "./styles";
-import { ScrollView, Dimensions, View } from "react-native";
+import { View } from "react-native";
 
 import { ValidatorContext } from "../../src/utils/Contexts/ValidatorContext";
 
@@ -73,7 +73,7 @@ const Login = ({ navigation }: Props) => {
           autoCapitalize="none"
           placeholder="Digite aqui seu e-mail"
           keyboardType="email-address"
-          placeholderTextColor={styles.colors.primary_300}
+          placeholderTextColor={theme.colors.primary_300}
           value={email}
           onChangeText={(text) => {
             setEmail(text);
@@ -89,7 +89,7 @@ const Login = ({ navigation }: Props) => {
           errorMessage={errorPassword}
           placeholder="Digite aqui uma senha de acesso"
           keyboardType="default"
-          placeholderTextColor={styles.colors.primary_300}
+          placeholderTextColor={theme.colors.primary_300}
           secureTextEntry
           value={password}
           onChangeText={(text) => {
