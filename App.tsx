@@ -1,10 +1,15 @@
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import useCachedResources from "./hooks/useCachedResources";
+import 'react-native-reanimated'
+import 'react-native-gesture-handler'
+
+
+import useCachedResources from "./src/utils/hooks/useCachedResources";
 import Navigation from "./navigation";
 
 import { ValidatorProvider } from "./src/utils/Contexts/ValidatorContext";
+import { MyThemeProvider } from './src/styles/MyThemeProvider';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -15,8 +20,10 @@ export default function App() {
     return (
       <SafeAreaProvider>
         <ValidatorProvider>
-          <StatusBar style="auto" />
-          <Navigation />
+          <MyThemeProvider>
+            <StatusBar style="auto" />
+            <Navigation />
+          </MyThemeProvider>
         </ValidatorProvider>
       </SafeAreaProvider>
     );

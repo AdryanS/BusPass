@@ -69,3 +69,18 @@ export const styles = {
     spacing_104: "104px",
   },
 };
+
+export type IThemeColors =
+  | "primary_pure"
+  | "primary_100"
+  | "primary_200"
+  | "primary_300"
+  | "primary_400"
+  | "secundary_pure"
+  | "secundary_100"
+  | "secundary_200"
+  | "secundary_300"
+  | "positive_pure"
+  | "positive_100"
+  | "negative_pure"
+  | "negative_100";

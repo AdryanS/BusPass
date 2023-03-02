@@ -1,8 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { styles } from "../../src/styles/styles";
 
 import { Text, Button, Input } from "../../src/components";
-import { Container } from "./styles";
+import {
+  Container,
+  FormContainer,
+  ButtonContainer,
+  TextDescription,
+  TextDescriptionLogin,
+  TextDescriptionLoginLink,
+  TextTitle,
+} from "./styles";
 import { ScrollView, Dimensions, View } from "react-native";
 
 import { ValidatorContext } from "../../src/utils/Contexts/ValidatorContext";
@@ -23,34 +31,42 @@ const Login = ({ navigation }: Props) => {
     password,
   } = useContext(ValidatorContext);
 
+  const [loading, setLoading] = useState(false);
+
+  async function validateUser() {
+
+    if (errorEmail !== "success") {
+      emailValidator(true)
+    } else if (errorPassword !== "success") {
+      passwordValidator(true)
+    } else {
+      await handleSignUser(email, password);
+    }
+  }
+
+  async function handleSignUser(email:string, password:string) {
+
+    const user = {
+      email,
+      password,
+    };
+
+    setLoading(true);
+    
+    setTimeout(() => {
+      navigation.navigate("Home")
+    }, 1000);
+  }
+
   return (
     <>
       <Container>
-        <Text
-          formater={styles.fonts.title_large}
-          style={{ color: styles.colors.secundary_pure, marginBottom: 8 }}
-        >
-          Login
-        </Text>
-        <Text
-          formater={styles.fonts.heading_100}
-          style={{
-            color: styles.colors.secundary_pure,
-            marginBottom: 32,
-          }}
-        >
+        <TextTitle>Login</TextTitle>
+        <TextDescription>
           Para começar a sua experiência, faça login em sua conta.
-        </Text>
+        </TextDescription>
       </Container>
-      <ScrollView
-        style={{
-          backgroundColor: styles.colors.secundary_100,
-          width: Dimensions.get("screen").width,
-          height: Dimensions.get("screen").height,
-          paddingTop: 32,
-          paddingHorizontal: 16,
-        }}
-      >
+      <FormContainer>
         <Input
           label="E-mail"
           errorMessage={errorEmail}
@@ -84,8 +100,7 @@ const Login = ({ navigation }: Props) => {
           }}
           ref={inputPasswordRef}
         />
-        <Text
-          formater={styles.fonts.title_small}
+        <TextDescriptionLoginLink
           style={{
             alignSelf: "flex-end",
             marginBottom: 16,
@@ -95,48 +110,33 @@ const Login = ({ navigation }: Props) => {
           }}
         >
           Esqueci minha senha
-        </Text>
+        </TextDescriptionLoginLink>
 
-        <View
-          style={{
-            width: Dimensions.get("screen").width - 32,
-            marginTop: 16,
-            alignItems: "center",
-            paddingBottom:
-              Dimensions.get("screen").height -
-              Dimensions.get("window").height -
-              16 +
-              32,
-          }}
-        >
+        <ButtonContainer>
           <Button
-            style={{
-              width: Dimensions.get("screen").width - 32,
-              height: 49,
-              backgroundColor: styles.colors.primary_pure,
-            }}
+            style={{ width: "100%" }}
+            background_color="primary_pure"
             text={"Entrar"}
+            loading={loading}
             onPress={() => {
-              emailValidator(true);
-              passwordValidator(true);
+              validateUser()
             }}
           />
-          <View style={{ marginTop: 16 }}>
-            <Text formater={styles.fonts.heading_100}>
+          <View style={{ marginTop: 24, marginBottom: 64 }}>
+            <TextDescriptionLogin>
               Não possui uma conta?
-              <Text
-                formater={styles.fonts.title_small}
+              <TextDescriptionLoginLink
                 onPress={() => {
                   navigation.navigate("Sign");
                 }}
               >
                 {" "}
                 Crie aqui o seu acesso!
-              </Text>
-            </Text>
+              </TextDescriptionLoginLink>
+            </TextDescriptionLogin>
           </View>
-        </View>
-      </ScrollView>
+        </ButtonContainer>
+      </FormContainer>
     </>
   );
 };

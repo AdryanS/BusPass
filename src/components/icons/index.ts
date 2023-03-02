@@ -1,2 +1,3 @@
 import { IconVariantsRight } from "./IconVariantsRight";
-export { IconVariantsRight };
+import { IconVariantsLoading } from "./IconVariantsLoading";
+export { IconVariantsRight, IconVariantsLoading };

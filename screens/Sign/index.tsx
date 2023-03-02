@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { styles } from "../../src/styles/styles";
 
 import { Text, Button, Input } from "../../src/components";
-import { Container, FormContainer } from "./styles";
+import { Container, FormContainer, TextTitle, TextDescription, ButtonContainer, TextDescriptionLogin, TextDescriptionLoginLink } from "./styles";
 import { View, Dimensions } from "react-native";
 
 import { Props } from "../../navigation";
@@ -33,24 +33,48 @@ const Sign = ({ navigation }: Props) => {
     setPassword,
   } = useContext(ValidatorContext);
 
+  const [loading, setLoading] = useState(false);
+
+  async function validateUser() {
+
+    if (errorName !== "success") {
+      nameValidator(true)
+    } else if (errorCpf !== "success") {
+      cpfValidator(true)
+    } else if (errorEmail !== "success") {
+      emailValidator(true)
+    } else if (errorPassword !== "success") {
+      passwordValidator(true)
+    } else {
+      await handleSignUser(name, cpf, email, password);
+    }
+  }
+
+  async function handleSignUser(name:string, cpf:string, email:string, password:string) {
+
+    const user = {
+      name,
+      cpf,
+      email,
+      password,
+    };
+
+    setLoading(true);
+    
+    setTimeout(() => {
+      navigation.navigate("Home")
+    }, 1000);
+  }
+
   return (
     <>
       <Container>
-        <Text
-          formater={styles.fonts.title_large}
-          style={{ color: styles.colors.secundary_pure, marginBottom: 8 }}
-        >
+        <TextTitle>
           Cadastro
-        </Text>
-        <Text
-          formater={styles.fonts.heading_100}
-          style={{
-            color: styles.colors.secundary_pure,
-            marginBottom: 32,
-          }}
-        >
+        </TextTitle>
+        <TextDescription>
           Para começar a sua experiência, crie uma conta.
-        </Text>
+        </TextDescription>
       </Container>
       <FormContainer>
         <Input
@@ -121,47 +145,30 @@ const Sign = ({ navigation }: Props) => {
           ref={inputPasswordRef}
         />
 
-        <View
-          style={{
-            width: Dimensions.get("screen").width - 32,
-            marginTop: 16,
-            alignItems: "center",
-            paddingBottom:
-              Dimensions.get("screen").height -
-              Dimensions.get("window").height -
-              16 +
-              32,
-          }}
-        >
+        <ButtonContainer>
           <Button
-            style={{
-              width: Dimensions.get("screen").width - 32,
-              height: 49,
-              backgroundColor: styles.colors.primary_pure,
-            }}
+            style={{ width: "100%" }}
+            background_color="primary_pure"
+            loading={loading}
             text={"Crie sua conta"}
             onPress={() => {
-              nameValidator(true);
-              cpfValidator(true);
-              emailValidator(true);
-              passwordValidator(true);
+              validateUser()
             }}
           />
-          <View style={{ marginTop: 16 }}>
-            <Text formater={styles.fonts.heading_100}>
+          <View style={{ marginTop: 24, marginBottom: 64 }}>
+            <TextDescriptionLogin>
               Já possui uma conta?
-              <Text
-                formater={styles.fonts.title_small}
+              <TextDescriptionLoginLink
                 onPress={() => {
                   navigation.navigate("Login");
                 }}
               >
                 {" "}
                 Faça seu login!
-              </Text>
-            </Text>
+              </TextDescriptionLoginLink>
+            </TextDescriptionLogin>
           </View>
-        </View>
+        </ButtonContainer>
       </FormContainer>
     </>
   );

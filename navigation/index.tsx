@@ -15,6 +15,10 @@ type RootStackParamList = {
   Sign: undefined;
   Login: undefined;
   Recovery: undefined;
+  Home: undefined;
+
+
+  Story: undefined;
 };
 
 export type Props = NativeStackScreenProps<RootStackParamList>;
@@ -23,6 +27,8 @@ import Onboarding from "../screens/Onboard";
 import Sing from "../screens/Sign";
 import Login from "../screens/Login";
 import Recovery from "../screens/Recovery";
+import Home from "../screens/Home";
+// import Story from '../storybook/index';
 
 export default function Navigation() {
   return (
@@ -51,6 +57,8 @@ function RootNavigator() {
       <Stack.Screen name="Sign" component={Sing} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Recovery" component={Recovery} />
+      <Stack.Screen name="Home" component={Home} />
+      {/* <Stack.Screen name="Story" component={Story} /> */}
     </Stack.Navigator>
   );
 }

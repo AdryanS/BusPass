@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { styles } from "../../src/styles/styles";
 
 import { Text, Button, Input } from "../../src/components";
-import { Container } from "./styles";
+import { Container, FormContainer, TextTitle, TextDescription, ButtonContainer, TextDescriptionLogin, TextDescriptionLoginLink } from "./styles";
 import { View, Dimensions } from "react-native";
 
 import { Props } from "../../navigation";
@@ -13,36 +13,41 @@ const Recovery = ({ navigation }: Props) => {
   const { email, emailValidator, errorEmail, setEmail, inputEmailRef } =
     useContext(ValidatorContext);
 
+    async function validateUser() {
+    if (errorEmail !== "success") {
+      emailValidator(true)
+    } else {
+      await handleSignUser(email);
+    }
+  }
+
+  async function handleSignUser(email:string) {
+
+    const user = {
+      email,
+    };
+
+    setLoading(true);
+    
+    setTimeout(() => {
+      setGoToLogin(true)
+    }, 1000);
+  }
+
   const [goToLogin, setGoToLogin] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   return (
     <>
       <Container>
-        <Text
-          formater={styles.fonts.title_large}
-          style={{ color: styles.colors.secundary_pure, marginBottom: 8 }}
-        >
+        <TextTitle>
           Recuperação de Senha
-        </Text>
-        <Text
-          formater={styles.fonts.heading_100}
-          style={{
-            color: styles.colors.secundary_pure,
-            marginBottom: 32,
-          }}
-        >
+        </TextTitle>
+        <TextDescription>
           Para recuperar sua senha, insira o seu e-mail de acesso.
-        </Text>
+        </TextDescription>
       </Container>
-      <View
-        style={{
-          backgroundColor: styles.colors.secundary_100,
-          width: Dimensions.get("screen").width,
-          height: Dimensions.get("screen").height,
-          paddingTop: 32,
-          paddingHorizontal: 16,
-        }}
-      >
+      <FormContainer>
         <Input
           label="E-mail"
           errorMessage={errorEmail}
@@ -60,32 +65,18 @@ const Recovery = ({ navigation }: Props) => {
           ref={inputEmailRef}
         />
 
-        <View
-          style={{
-            width: Dimensions.get("screen").width - 32,
-            marginTop: 16,
-            alignItems: "center",
-            paddingBottom:
-              Dimensions.get("screen").height -
-              Dimensions.get("window").height -
-              16 +
-              32,
-          }}
-        >
+        <ButtonContainer>
           {goToLogin == false ? (
             <>
               <Button
                 style={{
                   width: Dimensions.get("screen").width - 32,
-                  height: 49,
-                  backgroundColor: styles.colors.primary_pure,
                 }}
+                background_color="primary_pure"
+                loading={loading}
                 text={"Recuperar senha"}
                 onPress={() => {
-                  emailValidator(true);
-                  if (errorEmail == "success") {
-                    setGoToLogin(true);
-                  }
+                  validateUser()
                 }}
               />
             </>
@@ -96,28 +87,25 @@ const Recovery = ({ navigation }: Props) => {
                 alignContent: "center",
               }}
             >
-              <Text
-                formater={styles.fonts.heading_100}
+              <TextDescriptionLogin
                 style={{ textAlign: "center", marginBottom: 24 }}
               >
                 Encaminhamos um link de redefinição de senha ao seu e-mail.
-              </Text>
-              <Text
-                formater={styles.fonts.heading_100}
+              </TextDescriptionLogin>
+              <TextDescriptionLogin
                 style={{ textAlign: "center" }}
               >
                 Se já efetuou a redefinição,{" "}
-                <Text
-                  formater={styles.fonts.title_small}
+                <TextDescriptionLoginLink
                   onPress={() => navigation.navigate("Login")}
                 >
                   clique aqui para efetuar o login!
-                </Text>
-              </Text>
+                </TextDescriptionLoginLink>
+              </TextDescriptionLogin>
             </View>
           )}
-        </View>
-      </View>
+        </ButtonContainer>
+      </FormContainer>
     </>
   );
 };

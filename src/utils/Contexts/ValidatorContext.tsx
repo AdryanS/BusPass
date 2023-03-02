@@ -43,25 +43,25 @@ export const ValidatorContext = createContext({} as ValidatorContextData);
 
 export function ValidatorProvider({ children }: IPropsFunction) {
   const [name, setName] = useState("");
-  const [errorName, setErrorName] = useState("");
+  const [errorName, setErrorName] = useState("unvalidated");
   const inputNameRef = createRef<InputRefProps>();
 
   const [cpf, setCpf] = useState("");
-  const [errorCpf, setErrorCpf] = useState("");
+  const [errorCpf, setErrorCpf] = useState("unvalidated");
   const inputCpfRef = createRef<InputRefProps>();
 
   const [email, setEmail] = useState("");
-  const [errorEmail, setErrorEmail] = useState("");
+  const [errorEmail, setErrorEmail] = useState("unvalidated");
   const inputEmailRef = createRef<InputRefProps>();
 
   const [password, setPassword] = useState("");
-  const [errorPassword, setErrorPassword] = useState("");
+  const [errorPassword, setErrorPassword] = useState("unvalidated");
   const inputPasswordRef = createRef<InputRefProps>();
 
   function nameValidator(focus: boolean) {
     if (name.length < 10) {
       inputNameRef.current?.focusOnError(true, focus);
-      return setErrorName("digite seu nome completo.");
+      return setErrorName("Digite seu nome completo.");
     }
 
     inputNameRef.current?.focusOnError(false);
@@ -73,7 +73,7 @@ export function ValidatorProvider({ children }: IPropsFunction) {
       cpf = cpf.replace(/[^\d]+/g, "");
       if (cpf == "")
         return (
-          setErrorCpf("insira seu CPF"),
+          setErrorCpf("Insira seu CPF"),
           inputCpfRef.current?.focusOnError(true, focus)
         );
       // Elimina CPFs invalidos conhecidos
@@ -124,13 +124,13 @@ export function ValidatorProvider({ children }: IPropsFunction) {
   function emailValidator(focus: boolean) {
     if (email == "") {
       inputEmailRef.current?.focusOnError(true, focus);
-      return setErrorEmail("digite seu e-mail.");
+      return setErrorEmail("Digite seu e-mail.");
     }
 
     var reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
     if (reg.test(email) !== true) {
       inputEmailRef.current?.focusOnError(true, focus);
-      return setErrorEmail("e-mail invalido.");
+      return setErrorEmail("E-mail invalido.");
     }
 
     inputEmailRef.current?.focusOnError(false);
@@ -140,11 +140,11 @@ export function ValidatorProvider({ children }: IPropsFunction) {
   function passwordValidator(focus: boolean) {
     if (password == "") {
       inputPasswordRef.current?.focusOnError(true, focus);
-      return setErrorPassword("digite uma senha de acesso");
+      return setErrorPassword("Digite uma senha de acesso");
     }
     if (password.length < 8) {
       inputPasswordRef.current?.focusOnError(true, focus);
-      return setErrorPassword("sua senha precisa ter mais 8 caracteres.");
+      return setErrorPassword("Sua senha precisa ter mais 8 ou mais caracteres.");
     }
 
     inputPasswordRef.current?.focusOnError(false);

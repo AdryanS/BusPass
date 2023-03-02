@@ -12,7 +12,7 @@ interface IInputComponentProps extends TextInputProps {
   errorMessage: string;
 }
 
-import { Container, InputComponent } from "./styled";
+import { Container, InputComponent, LabelComponent, ErrorComponent } from "./styled";
 
 export const Input = forwardRef(
   ({ label, errorMessage, ...rest }: IInputComponentProps, ref: any) => {
@@ -31,32 +31,14 @@ export const Input = forwardRef(
     return (
       <>
         <Container>
-          <Text
-            style={{
-              color: styles.colors.primary_pure,
-              marginBottom: 4,
-              fontFamily: "Montserrat-600",
-              fontSize: 14,
-              fontStyle: "normal",
-            }}
-          >
+          <LabelComponent>
             {label}
-          </Text>
+          </LabelComponent>
           <InputComponent {...rest} ref={inputRef} />
-          {error == true ? (
-            <Text
-              style={{
-                color: "red",
-                marginVertical: 4,
-                fontFamily: styles.fonts.heading_100["font-family"],
-                fontSize: 10,
-                fontWeight: "400",
-              }}
-            >
+          {error && (
+            <ErrorComponent>
               {errorMessage}
-            </Text>
-          ) : (
-            <View style={{ marginBottom: 16 }}></View>
+            </ErrorComponent>
           )}
         </Container>
       </>
